@@ -1,0 +1,32 @@
+{
+	"name": "arckinteractive/stripe_subscriptions",
+	"type": "elgg-plugin",
+	"description": "Site Subscriptions",
+	"homepage": "http://arckinteractive.com",
+	"minimum-stability": "stable",
+	"keywords": [
+		"elgg", "plugin", "payments", "subscriptions", "stripe"
+	],
+	"license": "GPL-2.0",
+	"authors": [
+		{
+			"name": "Ismayil Khayredinov",
+			"email": "ismayil@arckinteractive.com"
+		}
+	],
+	"extra": {
+		"installer-name": "stripe_subscriptions"
+	},
+	"config": {
+		"vendor-dir": "vendors",
+		"preferred-install": "dist"
+	},
+	"suggest": {
+		"arckinteractive/roles": "@stable"
+	},
+	"require": {
+		"php": ">=5.3.3",
+		"composer/installers": ">=1.0.8"
+	}
+}
+
