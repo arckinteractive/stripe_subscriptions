@@ -37,7 +37,7 @@ $plans = $stripe->getPlans(100);
 $site = elgg_get_site_entity();
 if ($plans->data) {
 	foreach ($plans->data as $plan) {
-		if (!stripe_subsciptions_get_plan_from_id($plan->id)) {
+		if (!stripe_subscriptions_get_plan_from_id($plan->id)) {
 
 			$site_plan = new SiteSubscriptionPlan();
 			$site_plan->owner_guid = $site->guid;
