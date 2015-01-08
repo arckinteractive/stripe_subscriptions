@@ -53,7 +53,8 @@ if ($plans->data) {
 
 			$site_plan->setPlanId($plan->id);
 			$site_plan->setCycle(null, $plan->interval, $plan->interval_count);
-			$site_plan->setAmount($plan->amount);
+			system_message(elgg_echo('subscriptions:plans:import:success', array($plan->id)))
+			$site_plan->setAmount($plan->amount/100.00);
 			$site_plan->setCurrency($plan->currency);
 			$site_plan->setTrialPeriodDays($plan->trial_period_days);
 
