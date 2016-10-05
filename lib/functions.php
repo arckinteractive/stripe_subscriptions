@@ -81,17 +81,17 @@ function stripe_subscriptions_subscribe_to_plan($user_guid = 0, $plan_guid = 0) 
 		return true;
 	}
 
-	$stripe = new StripeClient();
+	$stripe = new StripeClient($user->guid);
 
 	if ($plan->isMembershipPlan()) {
 
 		$subscription = stripe_subscriptions_get_membership_subscription($user->guid);
 		if ($subscription) {
-			$subscription = $stripe->updateSubscription($user->guid, $subscription->id, array(
+			$subscription = $stripe->updateSubscription($subscription->id, array(
 				'plan' => $plan->getPlanId()
 			));
 		} else {
-			$subscription = $stripe->createSubscription($user->guid, array(
+			$subscription = $stripe->createSubscription(array(
 				'plan' => $plan->getPlanId()
 			));
 		}
@@ -101,7 +101,7 @@ function stripe_subscriptions_subscribe_to_plan($user_guid = 0, $plan_guid = 0) 
 			return $plan->subscribe($user->guid);
 		}
 	} else {
-		$subscription = $stripe->createSubscription($user->guid, array(
+		$subscription = $stripe->createSubscription(array(
 			'plan' => $plan->getPlanId()
 		));
 		if ($subscription) {
@@ -131,12 +131,12 @@ function stripe_subscriptions_cancel_subscription($user_guid = 0, $subscription_
 		return false;
 	}
 
-	$stripe = new StripeClient();
-	$subscription = $stripe->getSubscription($user->guid, $subscription_id);
+	$stripe = new StripeClient($user->guid);
+	$subscription = $stripe->getSubscription($subscription_id);
 
 	if ($subscription) {
 		$plan = stripe_subscriptions_get_plan_from_id($subscription->plan->id);
-		$subscription = $stripe->cancelSubscription($user->guid, $subscription->id, $at_period_end);
+		$subscription = $stripe->cancelSubscription($subscription->id, $at_period_end);
 	}
 
 	if ($plan instanceof SiteSubscriptionPlan && $subscription->status == 'canceled') {
@@ -183,8 +183,8 @@ function stripe_subscriptions_get_membership_subscription($user_guid = 0) {
 
 	$subscription_id = elgg_get_plugin_user_setting('stripe_membership_subscription_id', $user_guid, 'stripe_subscriptions');
 	if ($subscription_id) {
-		$stripe = new StripeClient();
-		$subscription = $stripe->getSubscription($user_guid, $subscription_id);
+		$stripe = new StripeClient($user_guid);
+		$subscription = $stripe->getSubscription($subscription_id);
 		if ($subscription) {
 			return $subscription;
 		}

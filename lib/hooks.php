@@ -351,7 +351,7 @@ function stripe_subscriptions_event_susbscription_trial_ending($hook, $type, $re
 	}
 
 	if ($card = stripe_has_card($user->guid)) {
-		$payment = elgg_echo('subscriptions:notify:trial_ending:card', array($card->type, $card->last4));
+		$payment = elgg_echo('subscriptions:notify:trial_ending:card', array($card->brand, $card->last4));
 	} else {
 		$payment = elgg_echo('subscriptions:notify:trial_ending:no_card');
 	}

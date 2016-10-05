@@ -1,20 +1,26 @@
 {
     "name": "composer/installers",
-    "type": "composer-installer",
+    "type": "composer-plugin",
     "license": "MIT",
     "description": "A multi-framework Composer library installer",
     "keywords": [
         "installer",
+        "Aimeos",
         "AGL",
         "AnnotateCms",
+        "Bitrix",
         "CakePHP",
+        "Chef",
         "CodeIgniter",
         "concrete5",
         "Craft",
         "Croogo",
+        "DokuWiki",
+        "Dolibarr",
         "Drupal",
         "Elgg",
         "FuelPHP",
+        "Grav",
         "Hurad",
         "Joomla",
         "Kohana",
@@ -26,12 +32,17 @@
         "MediaWiki",
         "OXID",
         "MODULEWork",
+        "Moodle",
         "Piwik",
         "phpBB",
         "PPI",
+        "Puppet",
+        "Roundcube",
         "shopware",
         "SilverStripe",
+        "SMF",
         "symfony",
+        "Thelia",
         "TYPO3",
         "WolfCMS",
         "WordPress",
@@ -50,16 +61,20 @@
         "psr-0": { "Composer\\Installers\\": "src/" }
     },
     "extra": {
-        "class": "Composer\\Installers\\Installer",
+        "class": "Composer\\Installers\\Plugin",
         "branch-alias": {
             "dev-master": "1.0-dev"
         }
     },
     "replace": {
-        "shama/baton": "*"
+        "shama/baton": "*",
+        "roundcube/plugin-installer": "*"
+    },
+    "require": {
+        "composer-plugin-api": "^1.0"
     },
     "require-dev": {
         "composer/composer": "1.0.*@dev",
-        "phpunit/phpunit": "3.7.*"
+        "phpunit/phpunit": "4.1.*"
     }
 }

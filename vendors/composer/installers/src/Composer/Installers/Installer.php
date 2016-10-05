@@ -1,6 +1,7 @@
 <?php
 namespace Composer\Installers;
 
+use Composer\IO\IOInterface;
 use Composer\Installer\LibraryInstaller;
 use Composer\Package\PackageInterface;
 use Composer\Repository\InstalledRepositoryInterface;
@@ -13,42 +14,63 @@ class Installer extends LibraryInstaller
      * @var array
      */
     private $supportedTypes = array(
+        'aimeos'       => 'AimeosInstaller',
+        'asgard'       => 'AsgardInstaller',
         'agl'          => 'AglInstaller',
         'annotatecms'  => 'AnnotateCmsInstaller',
+        'bitrix'       => 'BitrixInstaller',
+        'bonefish'     => 'BonefishInstaller',
         'cakephp'      => 'CakePHPInstaller',
+        'chef'         => 'ChefInstaller',
+        'ccframework'  => 'ClanCatsFrameworkInstaller',
         'codeigniter'  => 'CodeIgniterInstaller',
         'concrete5'    => 'Concrete5Installer',
         'craft'        => 'CraftInstaller',
         'croogo'       => 'CroogoInstaller',
+        'dokuwiki'     => 'DokuWikiInstaller',
+        'dolibarr'     => 'DolibarrInstaller',
         'drupal'       => 'DrupalInstaller',
         'elgg'         => 'ElggInstaller',
-        'piwik'        => 'PiwikInstaller',
         'fuel'         => 'FuelInstaller',
+        'fuelphp'      => 'FuelphpInstaller',
+        'grav'         => 'GravInstaller',
         'hurad'        => 'HuradInstaller',
         'joomla'       => 'JoomlaInstaller',
         'kirby'        => 'KirbyInstaller',
+        'kodicms'      => 'KodiCMSInstaller',
         'kohana'       => 'KohanaInstaller',
         'laravel'      => 'LaravelInstaller',
         'lithium'      => 'LithiumInstaller',
         'magento'      => 'MagentoInstaller',
         'mako'         => 'MakoInstaller',
-        'modxevo'      => 'MODXEvoInstaller',
         'mediawiki'    => 'MediaWikiInstaller',
+        'microweber'    => 'MicroweberInstaller',
         'modulework'   => 'MODULEWorkInstaller',
+        'modxevo'      => 'MODXEvoInstaller',
+        'moodle'       => 'MoodleInstaller',
         'october'      => 'OctoberInstaller',
         'oxid'         => 'OxidInstaller',
         'phpbb'        => 'PhpBBInstaller',
+        'pimcore'      => 'PimcoreInstaller',
         'piwik'        => 'PiwikInstaller',
         'ppi'          => 'PPIInstaller',
+        'puppet'       => 'PuppetInstaller',
+        'redaxo'       => 'RedaxoInstaller',
+        'roundcube'    => 'RoundcubeInstaller',
         'shopware'     => 'ShopwareInstaller',
         'silverstripe' => 'SilverStripeInstaller',
+        'smf'          => 'SMFInstaller',
         'symfony1'     => 'Symfony1Installer',
+        'thelia'       => 'TheliaInstaller',
+        'tusk'         => 'TuskInstaller',
+        'typo3-cms'    => 'TYPO3CmsInstaller',
+        'typo3-flow'   => 'TYPO3FlowInstaller',
+        'whmcs'        => 'WHMCSInstaller',
         'wolfcms'      => 'WolfCMSInstaller',
         'wordpress'    => 'WordPressInstaller',
         'zend'         => 'ZendInstaller',
         'zikula'       => 'ZikulaInstaller',
-        'typo3-flow'   => 'TYPO3FlowInstaller',
-        'typo3-cms'    => 'TYPO3CmsInstaller',
+        'prestashop'   => 'PrestashopInstaller'
     );
 
     /**
@@ -66,7 +88,7 @@ class Installer extends LibraryInstaller
         }
 
         $class = 'Composer\\Installers\\' . $this->supportedTypes[$frameworkType];
-        $installer = new $class($package, $this->composer);
+        $installer = new $class($package, $this->composer, $this->getIO());
 
         return $installer->getInstallPath($package, $frameworkType);
     }
@@ -95,6 +117,7 @@ class Installer extends LibraryInstaller
         }
 
         $locationPattern = $this->getLocationPattern($frameworkType);
+
         return preg_match('#' . $frameworkType . '-' . $locationPattern . '#', $packageType, $matches) === 1;
     }
 
@@ -107,6 +130,8 @@ class Installer extends LibraryInstaller
     protected function findFrameworkType($type)
     {
         $frameworkType = false;
+
+        krsort($this->supportedTypes);
 
         foreach ($this->supportedTypes as $key => $val) {
             if ($key === substr($type, 0, strlen($key))) {
@@ -131,10 +156,21 @@ class Installer extends LibraryInstaller
         if (!empty($this->supportedTypes[$frameworkType])) {
             $frameworkClass = 'Composer\\Installers\\' . $this->supportedTypes[$frameworkType];
             /** @var BaseInstaller $framework */
-            $framework = new $frameworkClass;
+            $framework = new $frameworkClass(null, $this->composer, $this->getIO());
             $locations = array_keys($framework->getLocations());
             $pattern = $locations ? '(' . implode('|', $locations) . ')' : false;
         }
+
         return $pattern ? : '(\w+)';
+    }
+
+    /**
+     * Get I/O object
+     *
+     * @return IOInterface
+     */
+    private function getIO()
+    {
+        return $this->io;
     }
 }

@@ -42,5 +42,5 @@ function stripe_subscriptions_init() {
 	elgg_register_plugin_hook_handler('customer.subscription.deleted', 'stripe.events', 'stripe_subscriptions_event_susbscription_deleted');
 	elgg_register_plugin_hook_handler('customer.subscription.trial_will_end', 'stripe.events', 'stripe_subscriptions_event_susbscription_trial_ending');
 
-	elgg_register_event_handler('login', 'user', 'stripe_subscriptions_login_user');
+	//elgg_register_event_handler('login', 'user', 'stripe_subscriptions_login_user');
 }

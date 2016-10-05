@@ -63,14 +63,14 @@ function stripe_subscriptions_login_user($event, $type, $user) {
 		return true;
 	}
 
-	$stripe = new StripeClient;
-	$subscriptions = $stripe->getSubscriptions($user->guid, 100);
+	$stripe        = new StripeClient($user->guid);
+	$subscriptions = $stripe->getSubscriptions(100);
 
 	if ($subscriptions->data) {
 		foreach ($subscriptions->data as $subscription) {
 			$plan = stripe_subscriptions_get_plan_from_id($subscription->plan->id);
 			if ($plan instanceof SiteSubscriptionPlan && $plan->isMembershipPlan()) {
-				elgg_set_plugin_user_setting('stripe_membership_subscription_id', $subscription->id, $user->id, 'stripe_subscriptions');
+				elgg_set_plugin_user_setting('stripe_membership_subscription_id', $subscription->id, $user->guid, 'stripe_subscriptions');
 				$plan->subscribe($user->guid);
 				return true;
 			}

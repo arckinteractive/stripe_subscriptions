@@ -28,6 +28,7 @@ if ($require_cards && !stripe_has_card($user->guid)) {
 
 if (elgg_extract('show_footer', $vars, true)) {
 	echo '<div class="small-12 elgg-foot columns text-right">';
+	echo elgg_view('input/hidden', ['name' => 'guid', 'value' => $user->guid]);
 	echo elgg_view('input/submit', array(
 		'value' => elgg_echo('save')
 	));

@@ -6,6 +6,11 @@ $user = get_entity($guid);
 $plan_guid = get_input('plan_guid');
 $plan = get_entity($plan_guid);
 
+if (!$user) {
+	register_error(elgg_echo('subscriptions:membership:plan:error:no_user'));
+	forward(REFERER);
+}
+
 if (!$plan instanceof SiteSubscriptionPlan || !$plan->isMembershipPlan()) {
 	register_error(elgg_echo('subscriptions:membership:plan:error:no_plan'));
 	forward(REFERER);
