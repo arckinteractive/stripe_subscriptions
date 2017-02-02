@@ -20,5 +20,4 @@
 		<type>plugin</type>
 		<name>roles</name>
 	</suggests>
-	<activate_on_install>true</activate_on_install>
 </plugin_manifest>
