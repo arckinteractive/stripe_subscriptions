@@ -81,8 +81,9 @@ foreach ($plans as $plan) {
 						));
 						echo "<input $attrs />";
 					}
-					echo '<span class="subscriptions-plans-cycle">' . $cycle . '</span>';
+					echo '<span class="subscriptions-plans-cycle"> ' . $cycle . '</span>';
 					echo '</label>';
+					echo ':&nbsp;';
 					echo '<span class="subscriptions-plans-price">' . $amount . '</span>';
 					echo '</td>';
 					
