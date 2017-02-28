@@ -1,5 +1,7 @@
 <?php
 
+access_show_hidden_entities(true);
+
 $guid = get_input('guid');
 $entity = get_entity($guid);
 
