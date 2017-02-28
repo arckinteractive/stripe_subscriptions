@@ -10,5 +10,6 @@ robots.txt
 /releases/
 /vendor/
 /vendors/
+composer.lock
 Gemfile.lock
 .env
