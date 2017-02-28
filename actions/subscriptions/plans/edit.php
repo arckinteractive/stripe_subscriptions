@@ -30,7 +30,7 @@ if (!$guid) {
 	$cycle = get_input('cycle');
 	$trial_period_days = get_input('trial_period_days');
 
-	if ($amount < 0 || !$currency) {
+	if ($amount <= 0 || !$currency) {
 		register_error(elgg_echo('subscriptions:plans:edit:error_required_field_empty'));
 		forward(REFERER);
 	}

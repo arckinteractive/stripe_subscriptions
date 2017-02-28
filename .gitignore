@@ -4,7 +4,11 @@
 robots.txt
 /nbproject/
 /.sass-cache/
+/node_modules/
+/build/
+/mod/
+/releases/
+/vendor/
 composer.lock
-
-vendors/.git
-vendors/**/.git
+Gemfile.lock
+.env
