@@ -1,6 +1,6 @@
 {
   "name": "stripe_subscriptions",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "license": "GPL-2.0",
   "repository": {
     "type": "git",
