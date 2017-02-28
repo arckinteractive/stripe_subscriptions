@@ -1,7 +1,9 @@
 <?php
 
-// Composer autoload
-require_once __DIR__ . '/vendors/autoload.php';
+// Composer autoload, depends on how it was installed
+if (file_exists(__DIR__ . '/vendors/autoload.php')) {
+	require_once __DIR__ . '/vendors/autoload.php';
+}
 
 // Load libs
 require_once __DIR__ . '/lib/functions.php';
