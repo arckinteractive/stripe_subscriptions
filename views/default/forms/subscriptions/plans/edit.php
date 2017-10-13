@@ -118,7 +118,7 @@ if (elgg_is_active_plugin('roles')) {
 	$roles = roles_get_all_selectable_roles();
 
 	foreach ($roles as $role) {
-		$roles_dropdown_options[$role->name] = $role->title;
+		$roles_dropdown_options[$role->name] = $role->getDisplayName();
 	}
 	?>
 	<div>

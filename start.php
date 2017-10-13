@@ -1,15 +1,6 @@
 <?php
 
-// Composer autoload, depends on how it was installed
-if (file_exists(__DIR__ . '/vendors/autoload.php')) {
-	require_once __DIR__ . '/vendors/autoload.php';
-}
-
-// Load libs
-require_once __DIR__ . '/lib/functions.php';
-require_once __DIR__ . '/lib/events.php';
-require_once __DIR__ . '/lib/hooks.php';
-require_once __DIR__ . '/lib/page_handlers.php';
+require_once __DIR__ . '/autoloader.php';
 
 elgg_register_event_handler('init', 'system', __NAMESPACE__ . '\\stripe_subscriptions_init', 700);
 elgg_register_event_handler('pagesetup', 'system', __NAMESPACE__ . '\\stripe_subscriptions_pagesetup');
