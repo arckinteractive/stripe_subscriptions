@@ -174,7 +174,7 @@ class SiteSubscriptionPlan extends ElggObject {
 
 	/**
 	 * Handle pricing
-	 * @return Handler_Pricing
+	 * @return StripePricing
 	 */
 	public function getPricing() {
 		return new StripePricing($this->getAmount(), 0, 0, $this->getCurrency());
@@ -260,7 +260,7 @@ class SiteSubscriptionPlan extends ElggObject {
 	public function exportAsStripeArray() {
 		$export = array(
 			'id' => $this->getPlanId(),
-			'amount' => $this->getPricing()->getStripePrice(),
+			'amount' => (int) $this->getPricing()->getStripePrice(),
 			'currency' => $this->getPricing()->getCurrency(),
 			'interval' => $this->getInterval(),
 			'interval_count' => $this->getIntervalCount(),
@@ -274,7 +274,9 @@ class SiteSubscriptionPlan extends ElggObject {
 			)
 		);
 
-		return array_filter($export);
+		return array_filter($export, function($e) {
+			return isset($e);
+		});
 	}
 
 }
