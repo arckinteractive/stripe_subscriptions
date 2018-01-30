@@ -1,3 +1,13 @@
+<a name="1.0.9"></a>
+## [1.0.9](https://github.com/arckinteractive/stripe_subscriptions/compare/1.0.8...v1.0.9) (2018-01-30)
+
+
+### Bug Fixes
+
+* **deps:** allow plugin to activate when installed via composer ([876777e](https://github.com/arckinteractive/stripe_subscriptions/commit/876777e))
+
+
+
 <a name="1.0.8"></a>
 ## [1.0.8](https://github.com/arckinteractive/stripe_subscriptions/compare/1.0.7...v1.0.8) (2017-10-13)
 
