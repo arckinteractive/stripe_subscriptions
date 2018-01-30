@@ -1,7 +1,7 @@
 <?php
 
 // Composer autoload
-require_once __DIR__ . '/vendors/autoload.php';
+require_once __DIR__ . '/autoloader.php';
 
 $subtypes = array(
 	SiteSubscriptionPlan::SUBTYPE => 'SiteSubscriptionPlan',
